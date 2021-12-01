@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="data:;base64,=">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <style type='text/css'>
+        #val1 {
+            max-width: 320px !important;
+        }
+
+        #val2 {
+            max-width: 320px !important;
+        }
+
+        #val3 {
+            max-width: 320px !important;
+        }
+
+        @media only screen and (max-width: 991.5px) {
+            #container1 {
+                margin-top: 1rem !important;
+                margin-bottom: 1rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body style="margin: 0; padding: 0;">
+    <header style="height: 60px;">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="{{ url_for('activity') }}">Физическая активность</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('news') }}">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('lk') }}">Приемы пищи</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('arch') }}">Архив</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Выйти</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-5 mb-5" id='container1'>
+        <form id='add' method="POST" action="/add_activity" style='max-width: 320px;'>
+            <div class="input-group mt-3 mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="calendar">Введите дату</label>
+                </div>
+                <input class="form-control" type="date" name="calendar" id="calendar">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label id='timer1' class="input-group-text" for="timer">Время</label>
+                </div>
+                <input class='form-control' type="time" name="timer" value="" id="timer">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Занятие</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" name='type1'>
+                    <option selected value="1">Ходьба</option>
+                    <option value="2">Зарядка</option>
+                    <option value="3">Спорт</option>
+                    <option value="4">Уборка в квартире</option>
+                    <option value="5">Работа в огороде</option>
+                    <option value="6">Сон</option>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="min" id='measure1'>Кол-во мин.</label>
+                </div>
+                <input class='form-control' type="number" name="min" value="" id="min">
+            </div>
+            <div class="container"
+                style=' display: flex; flex-direction: row; justify-content: space-between; margin: 0; padding: 0;'>
+                <button form="add" type="submit" class="btn btn-outline-primary">Сохранить</button>
+                <button form="remove" type="submit" class="btn btn-outline-primary">Удалить</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                    data-target="#exampleModal">ИМТ</button>
+            </div>
+        </form>
+        <form id='remove' method="POST" action="/remove">
+            <div class="table-responsive mt-3">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope='col' style='white-space:nowrap;'>Дата</th>
+                            <th scope='col' style='white-space:nowrap;'>Начало</th>
+                            <th abbr="Длит." scope='col' style='white-space:nowrap;'>Минуты</th>
+                            <th scope='col' style='white-space:nowrap;'>Нагрузка</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in Act %}
+                        <tr>
+                            <td style='white-space:nowrap;'><input id="{{row[3]}}" name="selected" class="checkbox"
+                                    style="margin-right: 0.5rem;" type="checkbox"
+                                    value="{{row[0]}}/{{row[1]}}/{{row[2]}}/{{row[3]}}">{{row[0]}}</td>
+                            <td>{{row[1]}}</td>
+                            <td>{{row[2]}}</td>
+                            <td>{{row[3]}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive mt-3">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope='col' style='white-space:nowrap;'>Дата</th>
+                            <th scope='col' style='white-space:nowrap;'>Проснулись в</th>
+                            <th abbr="Длит." scope='col' style='white-space:nowrap;'>Кол-во часов</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in Sleep %}
+                        <tr>
+                            <td style='white-space:nowrap;'><input id="{{row[3]}}" name="selected" class="checkbox"
+                                    style="margin-right: 0.5rem;" type="checkbox"
+                                    value="{{row[0]}}/{{row[1]}}/{{row[2]}}/{{row[3]}}">{{row[0]}}</td>
+                            <td>{{row[1]}}</td>
+                            <td>{{row[2]}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </form>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" id='okno'></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function timerjs() {
+            date = new Date(),
+                h = date.getHours(),
+                m = date.getMinutes(),
+                da = date.getDate(),
+                mo = date.getMonth(),
+                mo = mo + 1,
+                ye = date.getFullYear(),
+                da = (da < 10) ? '0' + da : da,
+                mo = (mo < 10) ? '0' + mo : mo,
+                h = (h < 10) ? '0' + h : h,
+                m = (m < 10) ? '0' + m : m,
+                document.getElementById('timer').value = h + ':' + m;
+            document.getElementById('calendar').value = ye + '-' + mo + '-' + da;
+        }
+        window.onload = timerjs;
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/javascript">
+        select = document.getElementsByClassName('custom-select')[0]
+        select.onchange = function () {
+            if (select.value == 6) {
+                $('#measure1').text('Кол-во час.')
+            } else { $('#measure1').text('Кол-во мин.') }
+        }
+    </script>
+    <script type="text/javascript">
+        function submit_entry() {
+            var BMI = document.getElementById('comp3');
+            var h = document.getElementById('comp2');
+            var m = document.getElementById('comp1');
+            var jsonBMI = {
+                BMI: BMI.value,
+                h: h.value,
+                m: m.value
+            };
+            fetch(`${window.origin}/setMBI`, {
+                method: "POST",
+                credentials: 'include',
+                body: JSON.stringify(jsonBMI),
+                cache: "no-cache",
+                headers: new Headers({
+                    "content-type": "application/json"
+                })
+            })
+                .then(function (response) {
+                    if (response.status !== 200) {
+                        console.log('Возникла проблема. Status Code: ' +
+                            response.status);
+                        return;
+                    }
+                    // Examine the text in the response  
+                    response.json().then(function (data) {
+                        console.log(data);
+                    });
+                })
+        }
+    </script>
+    <script type="text/babel">
+        class App extends React.Component {
+
+            constructor() {
+                super();
+                this.state = {
+                    total: 0,
+                    numbers: {
+                        comp1: '',
+                        comp2: ''
+                    }
+                };
+            }
+
+            componentDidMount() {
+                this.setState({ total: this.calculateTotal(this.state.numbers) });
+            }
+
+            calculateTotal = (numbers) => {
+                var a = Math.trunc(numbers.comp1 / (numbers.comp2 * 0.01 * numbers.comp2 * 0.01) * 100) / 100
+                var b = '0'
+                if (isNaN(a)) {
+                    return b
+                }
+                if (isFinite(a)) {
+                    return a
+                }
+                else {
+                    return b
+                }
+            }
+
+            handleTotal = (e) => {
+                const { value, name } = e.target;
+                const parsedValue = value === "" ? "" : parseFloat(value);
+                this.setState((prevState) => {
+                    const updatedNumbers = {
+                        ...prevState.numbers,
+                        [name]: parsedValue
+                    };
+                    const newTotal = this.calculateTotal(updatedNumbers);
+                    return {
+                        numbers: updatedNumbers,
+                        total: newTotal
+                    }
+                })
+                var student = {
+                    name: 'John',
+                    age: 30,
+                    isAdmin: false,
+                    courses: ['html', 'css', 'js'],
+                    wife: null
+                };
+
+                var json = JSON.stringify(student);
+            }
+
+            render() {
+                return (
+                    <div>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Индекс массы тела</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group mb-3" id='val1'>
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="comp1">Масса</label>
+                                </div>
+                                <input class='form-control' type="number" id="comp1" name="comp1" onChange={this.handleTotal} value={this.state.numbers.comp1} />
+                            </div>
+                            <div class="input-group mb-3" id='val2'>
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="comp2">Рост в см</label>
+                                </div>
+                                <input class='form-control' type="number" id='comp2' name="comp2" onChange={this.handleTotal} value={this.state.numbers.comp2} />
+                            </div>
+                            <div class="input-group mb-3" id='val3'>
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="comp3">ИМТ</label>
+                                </div>
+                                <input class='form-control' type="number" id='comp3' name="comp3" onChange={this.handleTotal} value={this.state.total} />
+                            </div>
+                            <button className='btn btn-outline-primary' type='button' onClick={submit_entry}>Записать</button>
+                        </div>
+
+                    </div>
+
+                );
+            }
+        }
+        ReactDOM.render(<App />, document.getElementById('okno'));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="data:;base64,=">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style type='text/css'>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        .dropdown-menu .dropdown-item {
+            white-space: normal !important;
+        }
+
+        @media only screen and (max-width: 321px) {
+            #dropp {
+                height: 57.8vh !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <form method='POST' action='/favourites_add' id='favourites_add'>
+        <div class="container m-0 p-0" id='polee'
+            style='display: flex; flex-direction: column; align-items: center; justify-items: center;'>
+            <div class="container m-0 p-0" style='width: 97.5%;'>
+                <div class="dropdown" id='category'>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Выбрать категорию
+                    </button>
+                    <div class="dropdown-menu overflow-auto" aria-labelledby="dropdownMenuButton"
+                        style='height: 60.75vh; width: 101%; margin-left: 4px;' id='dropp'>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Алкогольные напитки') }}">Алкогольные
+                            напитки</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Блюда из картофеля, овощей и грибов') }}">Блюда
+                            из картофеля, овощей и грибов</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Блюда из круп') }}">Блюда из круп</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Молочные продукты') }}">Молочные
+                            продукты</a>
+                        <a class="dropdown-item" href="{{ url_for('searchlink', search_string = 'Супы') }}">Супы</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Напитки') }}">Напитки</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Блюда из творога') }}">Блюда из
+                            творога</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Блюда из яиц') }}">Блюда из яиц</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Мясо и мясные продукты') }}">Мясо и
+                            мясные
+                            продукты</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Блюда из мяса и мясных продуктов') }}">Блюда
+                            из мяса и мясных продуктов</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Колбасы') }}">Колбасы</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Рыба и рыбные продукты') }}">Рыба и
+                            рыбные
+                            продукты</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Блюда из рыбы, морепродуктов и раков') }}">Блюда
+                            из рыбы, морепродуктов и раков</a>
+                        <a class="dropdown-item" href="{{ url_for('searchlink', search_string = 'Жиры, масла') }}">Жиры,
+                            масла</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Вспомогательные продукты') }}">Вспомогательные
+                            продукты</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Зерно, мука') }}">Зерно, мука</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Блюда из макаронных изделий') }}">Блюда
+                            из
+                            макароннных изделий</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Хлеб, выпечка') }}">Хлеб, выпечка</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Бобовые, орехи') }}">Бобовые, орехи</a>
+                        <a class="dropdown-item" href="{{ url_for('searchlink', search_string = 'Овощи') }}">Овощи</a>
+                        <a class="dropdown-item" href="{{ url_for('searchlink', search_string = 'Грибы') }}">Грибы</a>
+                        <a class="dropdown-item" href="{{ url_for('searchlink', search_string = 'Фрукты') }}">Фрукты</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Ягоды, варенье') }}">Ягоды, варенье</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Кондитерские изделия') }}">Кондитерские
+                            изделия</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Конфеты, шоколад') }}">Конфеты,
+                            шоколад</a>
+                        <a class="dropdown-item" href="{{ url_for('searchlink', search_string = 'Соусы') }}">Соусы</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Быстрое питание') }}">Быстрое питание</a>
+                        <a class="dropdown-item" href="{{ url_for('searchlink', search_string = 'Сыры') }}">Сыры</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Диабетические продукты') }}">Диабетические
+                            продукты</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Холодные блюда') }}">Холодные блюда</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Гарниры') }}">Гарниры</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Сладкие блюда') }}">Сладкие блюда</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Мучные изделия') }}">Мучные изделия</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Икра, морские продукты') }}">Икра, морские
+                            продукты</a>
+                        <a class="dropdown-item"
+                            href="{{ url_for('searchlink', search_string = 'Готовые завтраки') }}">Готовые завтраки</a>
+                    </div>
+                </div>
+                <div id='search2'>
+                    <div class="input-group mt-3">
+                        <form action="/search" method="POST">
+                            <input type="search" class="form-control" placeholder="Поиск в базе" aria-label="Search"
+                                name="input_query">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit" formaction="/search"
+                                    formmethod="POST">Поиск</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="input-group mt-3 mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="calendar">Дата</label>
+                    </div>
+                    <input class="form-control" type="date" name="calendar" id="calendar">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label id='timer1' class="input-group-text" for="timer">Время</label>
+                    </div>
+                    <input class="form-control" type="time" name="timer" value="" id="timer">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text">Прием пищи</label>
+                    </div>
+                    <select class="custom-select" name='food_type' id="selector">
+                        <option>Авто</option>
+                        <option>Завтрак</option>
+                        <option>Обед</option>
+                        <option>Ужин</option>
+                        <option>Перекус</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="sug" id='sug1'>Сахар до приема пищи</label>
+                    </div>
+                    <input class='form-control' type="number" step='0.1' name="sug" value="" id="sug">
+                </div>
+                <button form='favourites_add' type="submit" class="btn btn-outline-primary mt-3" id='btn_add'
+                    name='btn_add'>Записать в
+                    базу
+                </button>
+            </div>
+            <div class='container m-0 mt-3 p-0' id='bluda' style='width: 97.5%;'>
+                {% for row,j in result|zip(range(1,len)) %}
+                <div class="form-check pl-0">
+                    <label style='margin-left: 20px;'><input style='margin-left: -20px;' type="checkbox" class="check"
+                            name="row" value="{{row[0]}}//{{row[1]}}" id='food{{j}}'>
+                        {{ row[0] }}, {{row[1]}} г.</label>
+                </div>
+                {% endfor %}
+                <div id='proba'></div>
+                <button type='submit' class="btn btn-outline-danger mt-3" id='btn_del' name='btn_del'
+                    style='display: none; transition: display 250ms;' formaction="/favourites_dell">Удалить ошибочное</button>
+            </div>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        function timerjs() {
+            date = new Date(),
+                h = date.getHours(),
+                m = date.getMinutes(),
+                da = date.getDate(),
+                mo = date.getMonth(),
+                ye = date.getFullYear(),
+                mo = mo + 1,
+                da = (da < 10) ? '0' + da : da,
+                mo = (mo < 10) ? '0' + mo : mo,
+                h = (h < 10) ? '0' + h : h,
+                m = (m < 10) ? '0' + m : m,
+                document.getElementById('timer').value = h + ':' + m;
+            document.getElementById('calendar').value = ye + '-' + mo + '-' + da;
+        }
+        window.onload = timerjs;
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.contentWindow.js"
+        integrity="sha512-cJ7aOLpXbec1Km9craM6xL6UOdlWf9etIz7f+cwQv2tuarLm3PLb3dv3ZqIK++SE4ui+EE0nWqKB0dOaAOv9gQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type='text/javascript'>
+        $('input[type=checkbox]').click(function (event) {
+            if ($('.check').is(':checked')) {
+                $('#btn_del').css("display", "block");
+            } else {
+                $('#btn_del').css("display", "none")
+            }
+        })
+    </script>
+    <script type='text/javascript'>
+        $('#category').on('show.bs.dropdown', function () {
+            $('body').css('overflow', 'hidden');
+        })
+        $('#category').on('hide.bs.dropdown', function () {
+            $('body').css('overflow', 'auto');
+        })
+        $('#category1').on('show.bs.dropdown', function () {
+            $('body').css('overflow', 'hidden');
+        })
+        $('#category1').on('hide.bs.dropdown', function () {
+            $('body').css('overflow', 'auto');
+        })
+    </script>
+    <script type='text/javascript'>
+        $("#sug").change(function () {
+            var j = JSON.parse('{{ len | tojson }}');
+            var BG0 = document.getElementById('sug');
+            var type = document.getElementById('selector');
+            var time = document.getElementById('timer');
+            var date = document.getElementById('calendar');
+
+            var Food = [];
+            for (i = 1; i < j; i++) {
+                Food.push($(`#food${i}`).attr('value'));
+            }
+            var jsoninfo = {
+                Date: date.value,
+                Time: time.value,
+                BG0: BG0.value,
+                Type: type.value,
+                foodname: Food
+            };
+
+            fetch(`${window.origin}//onlinepredict`, {
+                method: "POST",
+                credentials: 'include',
+                body: JSON.stringify(jsoninfo),
+                cache: "no-cache",
+                headers: new Headers({
+                    "content-type": "application/json"
+                })
+            })
+                .then(function (response) {
+                    if (response.status !== 200) {
+                        console.log('Looks like there was a problem. Status Code: ' +
+                            response.status);
+                        return;
+                    }
+                    // Examine the text in the response  
+                    response.json().then(function (data) {
+                        $('#proba').text(`${data['BG1']}`);
+                    });
+                })
+        });
+    </script>
+</body>
+
+</html>

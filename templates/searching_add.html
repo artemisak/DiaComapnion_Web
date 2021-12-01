@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="data:;base64,=">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style type='text/css'>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        .dropdown-menu .dropdown-item {
+            white-space: normal !important;
+        }
+
+        .noselect {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body style='user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;'>
+    <form method='POST' action='/favourites'>
+        <div class="container" id='polee'
+            style='display: flex; flex-direction: column; align-items: center; justify-items: center;'>
+            <div class="container" style="max-width: 320px;">
+                <div id='search2' style='display: none;'>
+                    <div class="input-group mt-3">
+                        <form action="/search" method="POST">
+                            <input type="search" class="form-control" placeholder="Поиск в базе" aria-label="Search"
+                                name="input_query">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit" formaction="/search"
+                                    formmethod="POST">Поиск</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="input-group mt-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text">Вес (в граммах)</label>
+                    </div>
+                    <input class="form-control" type="number" name="libra" value="" id="libra">
+                </div>
+                <button type="submit" class="btn btn-outline-primary mt-3" id='btn_add' name='btn_add'>Добавить в
+                    список</button>
+            </div>
+            <div class='container mt-3' id='bluda' style="border-radius: 0.5rem; max-width: 320px;">
+                {% for name,receipt,id,j in name|zip(receipt,id,range(1,len)) %}
+                <div data-long-press-delay="500" class="form-check pl-0 noselect" title="{{receipt}}" id='row{{j}}'>
+                    <label id='label{{j}}' style='margin-left: 17.5px;'><input style='margin-left: -17.5px;'
+                            type="radio" class="check" name="row" id="{{id}}" value="{{name}}">
+                        {{name}}</label>
+                </div>
+                {% if receipt != '' %}
+                <div id='receipt{{j}}'
+                    style='margin-left: 17.5px; white-space: pre-line; margin-bottom: 1rem; margin-top: -0.5rem; display: none;'>
+                    <p>{{receipt}}</p>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.contentWindow.js"
+        integrity="sha512-cJ7aOLpXbec1Km9craM6xL6UOdlWf9etIz7f+cwQv2tuarLm3PLb3dv3ZqIK++SE4ui+EE0nWqKB0dOaAOv9gQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type='text/javascript'>
+        !function (e, t) { "use strict"; var n = null, a = "ontouchstart" in e || navigator.MaxTouchPoints > 0 || navigator.msMaxTouchPoints > 0, i = a ? "touchstart" : "mousedown", o = a ? "touchend" : "mouseup", m = a ? "touchmove" : "mousemove", r = 0, u = 0, s = 10, c = 10; function l(e) { var n; d(), n = e, e = a && n.touches && n.touches[0] ? n.touches[0] : n, this.dispatchEvent(new CustomEvent("long-press", { bubbles: !0, cancelable: !0, detail: { clientX: e.clientX, clientY: e.clientY }, clientX: e.clientX, clientY: e.clientY, offsetX: e.offsetX, offsetY: e.offsetY, pageX: e.pageX, pageY: e.pageY, screenX: e.screenX, screenY: e.screenY })) || t.addEventListener("click", function e(n) { t.removeEventListener("click", e, !0), function (e) { e.stopImmediatePropagation(), e.preventDefault(), e.stopPropagation() }(n) }, !0) } function v(a) { d(a); var i = a.target, o = parseInt(function (e, n, a) { for (; e && e !== t.documentElement;) { var i = e.getAttribute(n); if (i) return i; e = e.parentNode } return a }(i, "data-long-press-delay", "1500"), 10); n = function (t, n) { if (!(e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame && e.mozCancelRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame)) return e.setTimeout(t, n); var a = (new Date).getTime(), i = {}, o = function () { (new Date).getTime() - a >= n ? t.call() : i.value = requestAnimFrame(o) }; return i.value = requestAnimFrame(o), i }(l.bind(i, a), o) } function d(t) { var a; (a = n) && (e.cancelAnimationFrame ? e.cancelAnimationFrame(a.value) : e.webkitCancelAnimationFrame ? e.webkitCancelAnimationFrame(a.value) : e.webkitCancelRequestAnimationFrame ? e.webkitCancelRequestAnimationFrame(a.value) : e.mozCancelRequestAnimationFrame ? e.mozCancelRequestAnimationFrame(a.value) : e.oCancelRequestAnimationFrame ? e.oCancelRequestAnimationFrame(a.value) : e.msCancelRequestAnimationFrame ? e.msCancelRequestAnimationFrame(a.value) : clearTimeout(a)), n = null } "function" != typeof e.CustomEvent && (e.CustomEvent = function (e, n) { n = n || { bubbles: !1, cancelable: !1, detail: void 0 }; var a = t.createEvent("CustomEvent"); return a.initCustomEvent(e, n.bubbles, n.cancelable, n.detail), a }, e.CustomEvent.prototype = e.Event.prototype), e.requestAnimFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (t) { e.setTimeout(t, 1e3 / 60) }, t.addEventListener(o, d, !0), t.addEventListener(m, function (e) { var t = Math.abs(r - e.clientX), n = Math.abs(u - e.clientY); (t >= s || n >= c) && d() }, !0), t.addEventListener("wheel", d, !0), t.addEventListener("scroll", d, !0), t.addEventListener(i, function (e) { r = e.clientX, u = e.clientY, v(e) }, !0) }(window, document);
+    </script>
+    <script type="text/javascript">
+        var j = JSON.parse('{{ len | tojson }}');
+        for (i = 1; i < j; i++) {
+            if ($(`#row${i}`).attr('title') == '') {
+                document.getElementById(`row${i}`).style.color = 'black';
+            } else {
+                document.getElementById(`row${i}`).style.color = 'rgb(50, 72, 112)';
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        function togler() {
+            var w = window.screen.width;
+            if (w <= 991.5) {
+                document.addEventListener('long-press', function (e) {
+                    var rExp = new RegExp("label", "g");
+                    let record = '#receipt' + e.target.id.replace(rExp, '');
+                    $(`${record}`).toggle();
+                });
+            }
+        }
+        window.onload = togler;
+    </script>
+    <script type='text/javascript'>
+        $('#category').on('show.bs.dropdown', function () {
+            $('body').css('overflow', 'hidden');
+            $('body').css('touch-action', 'none');
+            $('body').css('-ms-touch-action', 'none');
+        })
+        $('#category').on('hide.bs.dropdown', function () {
+            $('body').css('overflow', 'auto');
+        })
+        $('#category1').on('show.bs.dropdown', function () {
+            $('body').css('overflow', 'hidden');
+            $('body').css('touch-action', 'none');
+            $('body').css('-ms-touch-action', 'none');
+        })
+        $('#category1').on('hide.bs.dropdown', function () {
+            $('body').css('overflow', 'auto');
+        })
+    </script>
+</body>
+
+</html>

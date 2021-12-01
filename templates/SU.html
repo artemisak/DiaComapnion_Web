@@ -1,0 +1,94 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block html %}
+
+{% block head %}
+{% block metas %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% endblock %}
+{% block style %}
+<link rel="icon" href="data:;base64,=">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+{% endblock %}
+<style type='text/css'>
+    .form-group.has-error.required {
+        color: red;
+    }
+
+    .form-group.has-error.required input {
+        border-color: red;
+    }
+
+    .help-block {
+        color: red;
+        margin: 0 !important;
+    }
+
+    .form-group.col-md-6 {
+        margin-bottom: 0 !important;
+    }
+
+    @media only screen and (max-width: 321px) {
+        .col-xl-5.col-lg-6.col-md-8.col-sm-10.mx-auto.text-left.form.p-4 {
+            padding: .5rem !important;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+{% block content %}
+
+<section id="cover" class="min-vh-100"
+    style='height: 100%; text-align: center; display: flex; align-items: center; position: relative;'>
+    <div id="cover-caption" style='width: 100%; position: relative; z-index: 1;'>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-left form p-4">
+                    <div class="px-2">
+                        <div class="container">
+                            <input id="csrf_token" name="csrf_token" type="hidden"
+                                value="IjQ2MWVmZGJmNTQ5YjkxMGJlYTcxNjAzNTczZTRlZmE3NTUzNDdiYjEi.YGdZxQ.wniBm8iLB1uQKcABukGyoJedhSs">
+                            <form class="form-signin" method="POST" action="/signup">
+                                {{ form.hidden_tag() }}
+                                {{ wtf.form_field(form.username) }}
+                                {{ wtf.form_field(form.username1) }}
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        {{ wtf.form_field(form.weight, class='form-control') }}
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        {{ wtf.form_field(form.height, class='form-control') }}
+                                    </div>
+                                </div>
+                                {{ wtf.form_field(form.email) }}
+                                {{ wtf.form_field(form.password) }}
+                                {{ wtf.form_field(form.password1) }}
+                                {{ wtf.form_field(form.select)}}
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Регистрация</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+{% block scripts%}
+{{ super() }}
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+{% endblock %}
+{% endblock%}
+
+{% endblock%}

@@ -1,0 +1,87 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block html %}
+{% block head %}
+{% block metas %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta meta name='viewport' content='width=device-width, user-scalable=no' />
+{% endblock %}
+{% block style %}
+<link rel="icon" href="data:;base64,=">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+{% endblock %}
+<style type='text/css'>
+    .form-group.has-error.required {
+        color: red;
+    }
+
+    .form-group.has-error.required input {
+        border-color: red;
+    }
+
+    .help-block {
+        color: red;
+        margin: 0 !important;
+    }
+
+    .form-group.col-md-6 {
+        margin-bottom: 0 !important;
+    }
+
+    @media only screen and (max-width: 321px) {
+        .col-xl-5.col-lg-6.col-md-8.col-sm-10.mx-auto.text-left.form.p-4 {
+            padding: .5rem !important;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+{% block content %}
+<section id="cover" class="min-vh-100"
+    style='height: 100%; text-align: center; display: flex; align-items: center; position: relative;'>
+    <div id="cover-caption" style='width: 100%; position: relative; z-index: 1;'>
+        <div class="container">
+            <div class="row text-black">
+                <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-left form p-4">
+                    <div class="px-2">
+                        <div class="container">
+                            <input id="csrf_token" name="csrf_token" type="hidden"
+                                value="IjQ2MWVmZGJmNTQ5YjkxMGJlYTcxNjAzNTczZTRlZmE3NTUzNDdiYjEi.YGdZxQ.wniBm8iLB1uQKcABukGyoJedhSs">
+                            <form class='form-signin' method="POST" action="/login" style="width: 100%">
+                                {{ form.hidden_tag() }}
+                                {{ wtf.form_field(form.username) }}
+                                {{ wtf.form_field(form.password) }}
+                                {{ wtf.form_field(form.remember) }}
+                                <button class='btn btn-lg btn-primary btn-block' type="submit">Вход</button>
+                                <div style='display: flex; flex-direction: row; margin-top: .5rem;'>
+                                    <p>Еще нет аккаунта? Пройдите регистрацию <a
+                                            href="{{ url_for('signup') }}">здесь</a>.</p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+    integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+    crossorigin="anonymous"></script>
+{% endblock %}
+{% endblock %}
+
+{% endblock %}
