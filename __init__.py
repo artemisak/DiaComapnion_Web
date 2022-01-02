@@ -25,7 +25,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from wtforms import StringField, PasswordField, BooleanField, IntegerField, SelectField
 from wtforms.validators import InputRequired, Length, Email, EqualTo
 from wtforms.validators import ValidationError, NumberRange, DataRequired
-#бесполезный коммент
+
 app = Flask(__name__)
 
 app.jinja_env.filters['zip'] = zip
