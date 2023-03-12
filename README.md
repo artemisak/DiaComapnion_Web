@@ -14,10 +14,10 @@ We are now working to improve prediction accuracy by adding information about th
 The dietary recommendation system takes into account the predicted blood sugar levels and the many years of medical experience of leading clinicians at the Almazov National Research Medical Centre. Based on the decision rules, it describes almost any possible situation that could cause blood sugar levels to rise above the target level and provides a dietary recommendation. The app collects the data for a week to then send it to your assigned doctor by post as an XLSX file. In the reply email, the doctor leaves comments and issues the necessary appointments. The e-diary can be downloaded by the user on their own for information purposes.
 
 ## Screenshots
-<div style='justify-content: center; align-items: center;'>
-<div style='justify-content: center; align-items: center;'>
-<img src="https://github.com/artemisak/DiaComapnion_Web/blob/main/Screenshots/1.png" style='height: 25rem;'>
-<img src="https://github.com/artemisak/DiaComapnion_Web/blob/main/Screenshots/2.png" style='height: 25rem;'>
+<div>
+<div>
+<img src="https://github.com/artemisak/DiaComapnion_Web/blob/main/Screenshots/1.png">
+<img src="https://github.com/artemisak/DiaComapnion_Web/blob/main/Screenshots/2.png">
 </div>
 <div>
 <img src="https://github.com/artemisak/DiaComapnion_Web/blob/main/Screenshots/3.png" style='height: 25rem;'>
