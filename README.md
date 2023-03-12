@@ -15,7 +15,7 @@ The dietary recommendation system takes into account the predicted blood sugar l
 
 ## Screenshots
 <div style='justify-content: center; align-items: center;'>
-<div>
+<div style='justify-content: center; align-items: center;'>
 <img src="https://github.com/artemisak/DiaComapnion_Web/blob/main/Screenshots/1.png" style='height: 25rem;'>
 <img src="https://github.com/artemisak/DiaComapnion_Web/blob/main/Screenshots/2.png" style='height: 25rem;'>
 </div>
